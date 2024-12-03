@@ -8,12 +8,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import br.edu.ifba.demo.frontend.dto.UsuarioDTO;
+import jakarta.annotation.PostConstruct;
 import reactor.core.publisher.Mono;
 
 @Service
 public class UsuarioService {
     @Autowired
+    
+    private WebClient.Builder webClientBuilder;
     private WebClient webClient;
+
+    @PostConstruct
+    public void init() {
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8080/usuario").build();
+    }
 
     public List<UsuarioDTO> listAllUsuarios(){
         Mono<List<UsuarioDTO>> usuarioList = this.webClient
@@ -41,6 +49,8 @@ public class UsuarioService {
         return false;
 
     }
+
+    
 
 
 }
