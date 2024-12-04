@@ -1,15 +1,12 @@
 package br.edu.ifba.demo.frontend.service;
 
+import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import br.edu.ifba.demo.frontend.dto.LivroDTO;
-import reactor.core.publisher.Mono;
 
 @Service
 public class LivroService {
@@ -18,7 +15,8 @@ public class LivroService {
     private final RestTemplate Temp = new RestTemplate();
 
     public List<LivroDTO> listAll() {
-        return List.of(Temp.getForObject(BASE_URL + "/listall", LivroDTO.class));
+        LivroDTO[] livros = Temp.getForObject(BASE_URL + "/listall", LivroDTO[].class);
+        return Arrays.asList(livros);
     }
 
     public LivroDTO getById(Long id) {
