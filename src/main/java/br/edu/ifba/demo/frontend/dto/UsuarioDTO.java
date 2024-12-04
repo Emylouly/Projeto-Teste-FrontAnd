@@ -11,5 +11,9 @@ public class UsuarioDTO {
 	private String senha;
 	private Timestamp create_at;
 	private Timestamp last_login;
+
+
 }
+
+
 

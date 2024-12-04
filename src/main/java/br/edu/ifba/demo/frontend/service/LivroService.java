@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import br.edu.ifba.demo.frontend.dto.LivroDTO;
@@ -13,46 +14,31 @@ import reactor.core.publisher.Mono;
 @Service
 public class LivroService {
 
-    @Autowired
-    
-    private WebClient webClient;
+    private final String BASE_URL = "http://localhost:8081/livro";
+    private final RestTemplate Temp = new RestTemplate();
 
-    public List<LivroDTO> listAllLivro(){
-        Mono<List<LivroDTO>> livroList = this.webClient
-            .method(HttpMethod.GET)
-            .uri("livro/listall")
-            .retrieve()
-            .bodyToFlux(LivroDTO.class)
-            .collectList();
-        
-        List<LivroDTO> list = livroList.block();
-        return list;
+    public List<LivroDTO> listAll() {
+        return List.of(Temp.getForObject(BASE_URL + "/listall", LivroDTO.class));
     }
 
-    public boolean addLivro(LivroDTO livroDTO) {
-        Mono<LivroDTO> response = this.webClient
-            .method(HttpMethod.POST)
-            .uri("livro/add")
-            .bodyValue(livroDTO)
-            .retrieve()
-            .bodyToMono(LivroDTO.class);
-
-        return response.block() != null;
+    public LivroDTO getById(Long id) {
+        return Temp.getForObject(BASE_URL + "/buscarporid/{id}/" + id, LivroDTO.class);
     }
 
-    public boolean delete(int id_livro){
-        Mono<LivroDTO> livroList = this.webClient
-            .method(HttpMethod.DELETE)  
-            .uri("livro/{id}", id_livro)
-            .retrieve()
-            .bodyToMono(LivroDTO.class);
-        
-            LivroDTO livro = livroList.block();
-        if (livro!=null) {
-            return true;
-        }
-        return false;
+    public LivroDTO getByIsbn(String isbn) {
+        return Temp.getForObject(BASE_URL + "/buscarporisbn/{isbn}/" + isbn, LivroDTO.class);
+    }
 
+    public LivroDTO getByTitulo(String titulo) {
+        return Temp.getForObject(BASE_URL + "/buscarportitulo/{titulo}/" + titulo, LivroDTO.class);
+    }
+
+    public LivroDTO save(LivroDTO livro) {
+        return Temp.postForObject(BASE_URL, livro, LivroDTO.class);
+    }
+
+    public void delete(Long id) {
+        Temp.delete(BASE_URL + "/deletelivro/{id}/" + id);
     }
     
 }
