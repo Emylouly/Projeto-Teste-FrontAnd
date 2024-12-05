@@ -16,6 +16,11 @@
         <p th:text="${errorMessage}"></p>
     </div>
 
+    <!-- Mensagem de sucesso -->
+    <div th:if="${deletelivro}" class="alert alert-success" role="alert">
+        <p th:text="${deletelivro}"></p>
+    </div>
+
     <!-- Tabela de livros -->
     <table>
         <thead>
@@ -50,15 +55,13 @@
                 <td th:text="${livro.data_cadastro}"></td>
                 <td th:text="${livro.preco}"></td>
                 <td>
-                    <a th:href="@{/livros/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm"><div class="pesquisa-container"><button>Deletar</button></div></a>
+                    <a th:href="@{/livros/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm">
+                        <div class="pesquisa-container"><button>Deletar</button></div>
+                    </a>
                 </td>
             </tr>
         </tbody>
     </table>
-
-    <div th:if="${deletelivro}" class="alert alert-success" role="alert">
-        <p th:text="${listall}"></p>
-    </div>
 
     <div class="pesquisa-container">
         <form th:action="@{/livro/listall}" method="get">

@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifba.demo.frontend.dto.LivroDTO;
 import br.edu.ifba.demo.frontend.service.LivroService;
-
 
 @Controller
 public class LivroController {
@@ -43,9 +43,8 @@ public class LivroController {
         return model;
     }
 
-
     @GetMapping("/livro/buscarporisbn")
-    public ModelAndView getById(@RequestParam("isbn") String isbn) {
+    public ModelAndView getByIsbn(@RequestParam("isbn") String isbn) {
         ModelAndView model = new ModelAndView();
         LivroDTO livro = livroService.getByIsbn(isbn);
 
@@ -72,13 +71,11 @@ public class LivroController {
         return model;
     }
 
+    // Deletar livro e redirecionar para a lista de livros
     @GetMapping("/livros/deletelivro/{id}")
-        public ModelAndView delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         livroService.delete(id); 
-        ModelAndView movel = new ModelAndView();
-        movel.addObject("delete", "Livro excluído com sucesso!");
-        movel.setViewName("livros"); 
-        return movel;
+        redirectAttributes.addFlashAttribute("deletelivro", "Livro excluído com sucesso!");
+        return "redirect:/livro/listall";  // Redireciona para a página de listagem de livros
     }
-        
 }

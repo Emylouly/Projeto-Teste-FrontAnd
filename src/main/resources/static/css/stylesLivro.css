@@ -116,3 +116,12 @@ tr:hover {
 .add-livro-container button:hover {
     background-color: #87cefa;
 }
+
+a {
+    text-decoration: none; /* Remove o sublinhado de todos os links */
+}
+
+button {
+    text-decoration: none; /* Garante que os botões também não tenham sublinhado */
+}
+
