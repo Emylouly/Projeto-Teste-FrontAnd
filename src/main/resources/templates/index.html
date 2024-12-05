@@ -4,73 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Livros</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f9;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/stylesIndex.css">
 </head>
 <body>
     <div class="header">
-        <h1>Lista de Livros</h1>
+        <h1>Clique no botão abaixo para acessar a lista de Livros</h1>
     </div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Editora</th>
-                    <th>Ano de publicação</th>
-                    <th>Gênero</th>
-                    <th>ISBN</th>
-                    <th>Número de Páginas</th>
-                    <th>Sinopse</th>
-                    <th>Idioma</th>  
-                    <th>Data do cadastro</th>   
-                    <th>Preço</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="livro : ${listaLivro}">
-                    <td th:text="${livro.id_livro}"></td>
-                    <td th:text="${livro.titulo}"></td>
-                    <td th:text="${livro.autor}"></td>
-                    <td th:text="${livro.editora}"></td>
-                    <td th:text="${livro.ano_publicacao}"></td>
-                    <td th:text="${livro.genero}"></td>
-                    <td th:text="${livro.isbn}"></td>
-                    <td th:text="${livro.sinopse}"></td>
-                    <td th:text="${livro.idioma}"></td>
-                    <td th:text="${livro.data_cadastro}"></td>
-                    <td th:text="${livro.preco}"></td>
-                    livro
-                </tr>
-            </tbody>
-        </table>
+    <form action="/livro/listall">
+
+        <button>Seguir para a página de interação com os livros</button>
+
+    </form>
+
 </body>
 </html>

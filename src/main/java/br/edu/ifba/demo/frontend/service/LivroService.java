@@ -20,23 +20,18 @@ public class LivroService {
     }
 
     public LivroDTO getById(Long id) {
-        return Temp.getForObject(BASE_URL + "/buscarporid/{id}/" + id, LivroDTO.class);
+        return Temp.getForObject(BASE_URL + "/buscarporid/{id}", LivroDTO.class, id);
     }
 
     public LivroDTO getByIsbn(String isbn) {
-        return Temp.getForObject(BASE_URL + "/buscarporisbn/{isbn}/" + isbn, LivroDTO.class);
+        return Temp.getForObject(BASE_URL + "/buscarporisbn/{isbn}", LivroDTO.class, isbn);
     }
 
     public LivroDTO getByTitulo(String titulo) {
-        return Temp.getForObject(BASE_URL + "/buscarportitulo/{titulo}/" + titulo, LivroDTO.class);
-    }
-
-    public LivroDTO save(LivroDTO livro) {
-        return Temp.postForObject(BASE_URL, livro, LivroDTO.class);
-    }
-
-    public void delete(Long id) {
-        Temp.delete(BASE_URL + "/deletelivro/{id}/" + id);
+        return Temp.getForObject(BASE_URL + "/buscarportitulo/{titulo}", LivroDTO.class, titulo);
     }
     
+    public void delete(Long id) {
+        Temp.delete(BASE_URL + "/deletelivro/{id}", id);
+    }
 }
