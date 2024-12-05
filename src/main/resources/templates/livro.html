@@ -32,6 +32,7 @@
                 <th>Idioma</th>
                 <th>Data do cadastro</th>
                 <th>Preço</th>
+                <th>Deletar</th>
             </tr>
         </thead>
         <tbody>
@@ -48,12 +49,18 @@
                 <td th:text="${livro.idioma}"></td>
                 <td th:text="${livro.data_cadastro}"></td>
                 <td th:text="${livro.preco}"></td>
+                <td>
+                    <a th:href="@{/livros/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm"><div class="pesquisa-container"><button>Deletar</button></div></a>
+                </td>
             </tr>
         </tbody>
     </table>
 
-    <div class="pesquisa-container">
+    <div th:if="${deletelivro}" class="alert alert-success" role="alert">
+        <p th:text="${listall}"></p>
+    </div>
 
+    <div class="pesquisa-container">
         <form th:action="@{/livro/listall}" method="get">
             <button type="submit">Listar todos os livros</button>
         </form>
@@ -73,6 +80,5 @@
             <button type="submit">Pesquisar pelo Título</button>
         </form>
     </div>
- 
 </body>
 </html>
