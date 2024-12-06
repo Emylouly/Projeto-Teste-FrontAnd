@@ -43,6 +43,7 @@ public class LivroController {
         return model;
     }
 
+    // Buscar livro pelo ISBN
     @GetMapping("/livro/buscarporisbn")
     public ModelAndView getByIsbn(@RequestParam("isbn") String isbn) {
         ModelAndView model = new ModelAndView();
@@ -57,6 +58,7 @@ public class LivroController {
         return model;
     }
 
+    // Buscar com titulo
     @GetMapping("/livro/buscarportitulo")
     public ModelAndView getByTitulo(@RequestParam("titulo") String titulo) {
         ModelAndView model = new ModelAndView();
